@@ -27,18 +27,19 @@ const handleStart=async ()=>{
   await localStorage.setItem("userData", JSON.stringify(userData)); // Stringify the object before storing
    window.location.href = "input.html"; // it will render a new html page
 }
-const handleAlgoChange=()=>{
-   
-      if(algoSelected.value=="Round Robin"){
-         
-        var hiddenElement = document.getElementById("timeQuanta");
-        hiddenElement.removeAttribute("hidden");
-      }else{
-             
-        var hiddenElement = document.getElementById("timeQuanta");
-        hiddenElement.setAttribute("hidden","true");
-      }
-}
+const handleAlgoChange = () => {
+  const algoSelected = document.getElementById("algos");
+  const timeQuantaSelect = document.getElementById("timeQuanta");
+  const timeQuantaLabel = document.getElementById("timeQuantaLabel");
+
+  if (algoSelected.value === "Round Robin") {
+    timeQuantaSelect.hidden = false;
+    timeQuantaLabel.style.display = "block";
+  } else {
+    timeQuantaSelect.hidden = true;
+    timeQuantaLabel.style.display = "none";
+  }
+};
 
 algoSelected.addEventListener("change",handleAlgoChange);
 startButton.addEventListener("click",handleStart);
