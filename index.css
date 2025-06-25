@@ -1,148 +1,346 @@
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
     position: relative;
-    background: #f8f8f8;
-}
-.box {
-    position: absolute;
-   
-    width: 57%;
-    border: 3px solid #FEFCFF;
-    padding: 10px;
-    
-    top: 90px;
-    left: 20%;
-    height: 73vh;
-    border-radius: 1em;
-    background:#FEFCFF;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    /* background-image: url('./landing.jpg');
-    background-repeat: no-repeat;
-    background-size: cover; */
-    
-  }
-  
-#signupp{
-           font-weight: bolder;
-           font-size: 40px;
-           font-family: Arial;
-}
-  
-  .signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 3em;
+    padding-bottom: 5em;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #1a1a1a;
 
-    
-    position: absolute;
-    width: 40%;
-    height: 60vh;
-    border: 3px solid white;
-    right: 8%;
-    top: 20%;
-   
-
-  }
-  .picture{
-    position: absolute;
-    height: 40vh;
-    width: 105%;
-    
-    right: 120%;
-    top: 2%;
     background-image: url('./landing.jpg');
+    background-size: cover;                 /* ✅ fills entire screen */
+    background-position: center center;     /* ✅ centers it */
+    background-repeat: no-repeat;           /* ✅ no tiling */
+    background-attachment: scroll;          /* ✅ allows responsive sizing */
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;           /* 👈 allow height to grow */
+  min-height: 100vh;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./landing.jpg');
+    background-size: 100% auto;  /* Slight zoom, avoids black bars */
+    background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
-    
+    background-attachment: fixed;
+    z-index: -1;
+}
 
-    
 
-  }
-  .inpt{
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    color: white;
+    z-index: 3;
+    position: relative;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.cpu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5em;
+    height: 3.5em;
+    background: linear-gradient(45deg, #00bcd4, #2196f3);
+    border-radius: 50%;
+    margin-bottom: 1em;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.5em 1.25em;
+}
+
+.cpu-icon svg {
+    color: white;
+    width: 2em;
+    height: 2em;
+}
+
+.main-title {
+    font-size: 4em;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    text-shadow: 0.1em 0.1em 0.25em rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+}
+
+.description {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 auto 0 auto;
+    margin-top: 0.25em;
+    max-width: 90%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    text-shadow: 0.05em 0.05em 0.15em rgba(0, 0, 0, 0.5);
+}
+
+/* Form Container */
+.box {
     width: 90%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    height: 40px;
+    max-width: 28em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5em;
+    margin: 1em 0 3em 0; 
+    border-radius: 1em;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.5em 2em;
+    z-index: 2;
+    position: relative;
+}
+
+#signupp {
+    display: none;
+}
+
+.signup {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border: none;
+    padding: 0;
+}
+
+.picture {
+    display: none;
+}
+
+/* Configuration Title */
+.signup::before {
+    content: '⚙️ Configuration';
+    display: block;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-family: Arial, sans-serif;
+}
+
+/* Algorithm Selection Label */
+.signup form::before {
+    content: '⚡ Scheduling Algorithm';
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* New label styles */
+.input-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875em;
+    font-weight: 500;
+    font-family: Arial, sans-serif;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+/* Only the first label (Scheduling Algorithm) needs to be aligned from the top */
+.input-label:first-of-type {
+    margin-top: 0;
+}
+
+.inpt, .inpts {
+    width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75em;
+    height: 3em;
     font-size: 1em;
-    background:#FEFCFF;
-    border-color:gray;
-    border-width: 1px;
-    font-family: cursive;
-  }
-  .inpt:focus {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0 1em;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+    margin-top: 0.5em;
+    box-sizing: border-box;
+}
+
+/* First select (Algorithm) */
+.inpts:first-of-type {
+    margin-top: 0;
+}
+
+/* Input Type field spacing */
+#inputs {
+    position: relative;
+    margin-top: 0; /* now controlled by label margin */
+}
+
+/* REMOVE old ::before from #inputs */
+#inputs::before {
+    content: none;
+}
+
+/* Time Quanta styling */
+#timeQuanta {
+    margin-top: 0em; /* or more if needed */
+    position: relative;
+}
+
+#timeQuantaLabel {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875em;
+    font-weight: 500;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    font-family: Arial, sans-serif;
+}
+
+
+
+/* REMOVE old ::before from #timeQuanta */
+#timeQuanta::before {
+    content: none;
+}
+
+.inpt:focus, .inpts:focus {
     outline: none;
-  }
-  /* .inpts:focus {
+    border-color: rgba(0, 188, 212, 0.5);
+    box-shadow: 0 0 0 0.2em rgba(0, 188, 212, 0.1);
+}
+
+.inpt::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.inpts option {
+    background: rgba(30, 30, 30, 0.95);
+    color: white;
+    padding: 0.5em;
+}
+
+/* Show time quanta when Round Robin is selected */
+#timeQuanta[style*="display: block"] {
+    display: block !important;
+    animation: slideIn 0.3s ease-out;
     outline: none;
-  } */
-  .inpts{
-    margin-top: 11%;
-    background:#FEFCFF;
-    width: 80%;
-    height: 30px;
-    font-family: cursive;
-    font-size: 1em;
-    border-radius: 5px;
-  }
+    border-color: rgba(255, 255, 255, 0.2); /* same as normal */
+    box-shadow: none; /* remove glowing blue edge */
+}
 
-  .but{
-    position: absolute;
-    margin-top: 10%;
-    left: 0%;
 
-  }
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5em);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-  
-/* CSS */
+.but {
+    margin-top: 2.5em; /* Increased spacing before button */
+    width: 100%;
+    position: relative;
+}
+
 .butt {
     align-items: center;
-    background-clip: padding-box;
-    background-color:blueviolet;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-    box-sizing: border-box;
+    background: linear-gradient(45deg, #00bcd4, #2196f3);
+    border: none;
+    border-radius: 0.75em;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.25em 1em;
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-size: 1.125em;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
-    margin: 0;
-    min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    position: relative;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: auto;
-  }
-  
-  .butt,
-  .butt{
-    background-color:blueviolet;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  }
-  
-  .butt {
-    transform: translateY(-1px);
-  }
-  
-  .butt {
-    background-color: blueviolet;
-    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-    transform: translateY(0);
-  }
-  
-  .signin{
-      position: absolute;
-      top:80%;
-      left: 10%;
-      font-size: 1.5em;
-  }
+    min-height: 3em;
+    padding: 0.75em 1.5em;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
 
+.butt:hover {
+    background: linear-gradient(45deg, #00acc1, #1976d2);
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0.375em 1.25em;
+    transform: translateY(-0.125em) scale(1.05);
+}
+
+.butt:active {
+    background: linear-gradient(45deg, #0097a7, #1565c0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0.125em 0.5em;
+    transform: translateY(0) scale(1);
+}
+
+.signin {
+    display: none;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1em);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-section, .box {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 188, 212, 0.5);
+    border-radius: 0.25em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 188, 212, 0.7);
+}
