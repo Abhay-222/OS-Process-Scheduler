@@ -1,197 +1,403 @@
-body{
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
-    background: #f8f8f8;
+    background: #0a0a0a;
+    background-image: url('./bg\ image.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Add overlay for better readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .box {
-    position: absolute;
-   
-    width: 77%;
-    border: 3px solid #FEFCFF;
-    padding: 10px;
-    
-    top: 20px;
-    left: 10%;
-    height: 90vh;
-    border-radius: 1em;
-    background:#FEFCFF;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    /* background-image: url('./landing.jpg');
-    background-repeat: no-repeat;
-    background-size: cover; */
-    
-  }
-
-  #signupp{
-    position: absolute; 
-    font-weight: bolder;
-    font-size: 35px;
-    font-family: Arial;
-    left: 40%;
-    top: 0%;
-
-}
-/* .inputfield{
-    position: absolute; 
-    width: fit-content;
-    height: fit-content;
-    left: 40%;
-    top: 0%;
-} */
-.take{
-
-    
-    position: absolute;
-    width: 40%;
-    height: 65vh;
-    border: 3px solid white;
-    right: 3%;
-    top: 17%;
-   
-
-  }
-  .inpt{
+    position: relative;
+    z-index: 10;
     width: 90%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    height: 40px;
-    font-size: 1em;
-    background:#FEFCFF;
-    border-color:gray;
-    border-width: 1px;
-    font-family: cursive;
-  }
-  .inpt:focus {
-    outline: none;
-  }
-  .inpts{
-    margin-top: 11%;
-    background:#FEFCFF;
-    width: 80%;
-    height: 30px;
-    font-family: cursive;
-    font-size: 1em;
-    border-radius: 5px;
-    /* height: fit-content;
-    width: fit-content; */
-  }
+    max-width: 1200px;
+    margin-bottom: 3em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 90vh;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
 
-  
-  .but{
-    position: absolute;
-    margin-top: 10%;
-    left: 0%;
+#signupp {
+    position: relative;
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-align: center;
+    top: 0;
+    left: 0;
+    margin: 0 0 1rem 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-  }
+.algo {
+    position: relative;
+    text-align: center;
+    margin: 1rem 0 2rem 0;
+    width: 100%;
+}
 
-  
-/* CSS */
+#algo {
+    border: none;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.5);
+    font-size: 1.5rem;
+    width: 35em;
+    background: transparent;
+    color: #00ffff;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Main content grid */
+.box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    grid-template-areas: 
+        "header header"
+        "algo algo"
+        "table form"
+        "buttons buttons";
+}
+
+#signupp {
+    grid-area: header;
+    margin-bottom: 0;
+}
+
+.algo {
+  margin-top: 0;
+    grid-area: algo;
+}
+
+.display {
+    grid-area: table;
+    position: relative;
+    width: 100%;
+    top: auto;
+    left: auto;
+}
+
+.take {
+    grid-area: form;
+    position: relative;
+    width: 88%;
+    height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    right: auto;
+    top: auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.inpts {
+    margin-bottom: 2rem;
+    background: transparent;
+    width: 100%;
+}
+
+.inpt {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    height: 50px;
+    font-size: 1rem;
+    background: transparent;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 0.5rem 0;
+    transition: border-color 0.3s ease;
+}
+
+
+.inpt::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Table Styles */
+table {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+td, th {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    padding: 12px;
+    color: white;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Button Styles */
+.but {
+    position: relative;
+    margin: 1rem 0.5rem;
+    display: inline-block;
+}
+
 .butt {
     align-items: center;
     background-clip: padding-box;
-    background-color:blueviolet;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 16px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    padding: 0.875rem 1.5rem;
     position: relative;
     text-decoration: none;
-    transition: all 250ms;
+    transition: all 250ms ease;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
     width: auto;
-  }
-  
-  .butt,
-  .butt{
-    background-color:blueviolet;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  }
-  
-  .butt {
-    transform: translateY(-1px);
-  }
-  
-  .butt {
-    background-color: blueviolet;
-    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    backdrop-filter: blur(10px);
+}
+
+.butt:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.butt:active {
     transform: translateY(0);
-  }
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
 
-  .display{
-    position: absolute;
-    width: 40%;
-    top: 27%;
-    left: 5%;
+/* Specific button colors */
+#simulation {
+    background: linear-gradient(135deg, #ef2609, #ff4444);
+}
+
+#simulation:hover {
+    background: linear-gradient(135deg, #d41f0a, #ff3333);
+}
+
+#backb, #del {
+    background: linear-gradient(135deg, #493b55, #5a4a66);
+}
+
+#backb:hover, #del:hover {
+    background: linear-gradient(135deg, #5a4a66, #6b5b77);
+}
+
+.butt:not(#simulation):not(#backb):not(#del) {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+.butt:not(#simulation):not(#backb):not(#del):hover {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+}
+
+/* Button positioning */
+#delete {
+    position: relative;
+    left: 0;
+}
+
+#add {
+    position: relative;
+    left: 0;
+}
+
+#back {
+    position: relative;
+    left: 0;
+    display: inline-block;
+}
+
+#sim {
+    position: relative;
+    left: 0;
+    display: inline-block;
+    float: right;
+}
+
+/* Form button container */
+.take .but {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+/* Table button container */
+.display .but {
+    display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .box {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "algo"
+            "form"
+            "table"
+            "buttons";
+        width: 95%;
+        padding: 1.5rem;
+    }
     
-  }
-
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+    #signupp {
+        font-size: 2rem;
+    }
     
-  }
-  
-  tr:nth-child(even) {
-    background-color:#ad939317;
-  }
+    .take {
+        margin-bottom: 2rem;
+    }
+}
 
-  #simulation{
-    background-color:#ef2609cf
-  }
-  #sim{
-    position: absolute;
-    left: 50%;
-  }
-  #back{
-    position: absolute;
-    left: 10%;
-  }
-  #backb{
-    background-color: #493b55;
-  }
-  .algo{
-      
-    position: absolute;
-    top: 18%;
-    left: 20%;
-    width: fit-content;
-    height: fit-content;
-  }
-  #algo{
-    border-bottom: none;
-    font-size: 1.3em;
-    width: fit-content;
-  }
-  #add{
+@media (max-width: 768px) {
+    .box {
+        width: 95%;
+        padding: 1rem;
+        top: 10px;
+    }
+    
+    #signupp {
+        font-size: 1.8rem;
+    }
+    
+    .inpt {
+        font-size: 0.9rem;
+        height: 45px;
+    }
+    
+    .butt {
+        font-size: 14px;
+        padding: 0.75rem 1.25rem;
+        min-height: 2.5rem;
+    }
+    
+    td, th {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}
 
-    position: absolute;
-    left: 50%;
-  }
-  #del{
-    background-color: #493b55;
-  }
+@media (max-width: 480px) {
+    .box {
+        width: 98%;
+        padding: 0.75rem;
+    }
+    
+    #signupp {
+        font-size: 1.5rem;
+    }
+    
+    .take {
+        padding: 1rem;
+    }
+    
+    .butt {
+        font-size: 12px;
+        padding: 0.5rem 1rem;
+        min-height: 2rem;
+    }
+    
+    #sim {
+        float: none;
+        display: block;
+        margin-top: 1rem;
+    }
+}
+
+/* Hide priority field if needed */
+.hide-priority #prDiv {
+    display: none;
+}
+
+/* Loading states */
+.butt:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.butt:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus states for accessibility */
+.inpt:focus,
+.butt:focus {
+    outline: 2px solid #00ffff;
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection colors */
+::selection {
+    background: rgba(0, 255, 255, 0.3);
+    color: white;
+}
+
+::-moz-selection {
+    background: rgba(0, 255, 255, 0.3);
+    color: white;
+}
