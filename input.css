@@ -13,18 +13,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Add overlay for better readability */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    pointer-events: none;
-}
 
 .box {
     position: relative;
@@ -43,6 +31,14 @@ body::before {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    grid-template-areas: 
+        "header header"
+        "algo algo"
+        "table form"
+        "buttons buttons";
 }
 
 #signupp {
@@ -53,16 +49,18 @@ body::before {
     text-align: center;
     top: 0;
     left: 0;
-    margin: 0 0 1rem 0;
+    margin: 0;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    grid-area: header;
 }
 
 .algo {
     position: relative;
     text-align: center;
-    margin: 1rem 0 2rem 0;
+    margin: 0 0 2rem 0;
     width: 100%;
+    grid-area: algo;
 }
 
 #algo {
@@ -75,28 +73,6 @@ body::before {
     text-align: center;
     font-weight: 600;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-/* Main content grid */
-.box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    grid-template-areas: 
-        "header header"
-        "algo algo"
-        "table form"
-        "buttons buttons";
-}
-
-#signupp {
-    grid-area: header;
-    margin-bottom: 0;
-}
-
-.algo {
-  margin-top: 0;
-    grid-area: algo;
 }
 
 .display {
@@ -145,7 +121,6 @@ body::before {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Table Styles */
 table {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     border-collapse: collapse;
@@ -178,7 +153,6 @@ tr:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Button Styles */
 .but {
     position: relative;
     margin: 1rem 0.5rem;
@@ -224,7 +198,6 @@ tr:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific button colors */
 #simulation {
     background: linear-gradient(135deg, #ef2609, #ff4444);
 }
@@ -249,7 +222,6 @@ tr:hover {
     background: linear-gradient(135deg, #7c3aed, #9333ea);
 }
 
-/* Button positioning */
 #delete {
     position: relative;
     left: 0;
@@ -273,101 +245,19 @@ tr:hover {
     float: right;
 }
 
-/* Form button container */
 .take .but {
     display: inline-block;
     margin-right: 1rem;
 }
 
-/* Table button container */
 .display .but {
     display: inline-block;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .box {
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-            "header"
-            "algo"
-            "form"
-            "table"
-            "buttons";
-        width: 95%;
-        padding: 1.5rem;
-    }
-    
-    #signupp {
-        font-size: 2rem;
-    }
-    
-    .take {
-        margin-bottom: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .box {
-        width: 95%;
-        padding: 1rem;
-        top: 10px;
-    }
-    
-    #signupp {
-        font-size: 1.8rem;
-    }
-    
-    .inpt {
-        font-size: 0.9rem;
-        height: 45px;
-    }
-    
-    .butt {
-        font-size: 14px;
-        padding: 0.75rem 1.25rem;
-        min-height: 2.5rem;
-    }
-    
-    td, th {
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .box {
-        width: 98%;
-        padding: 0.75rem;
-    }
-    
-    #signupp {
-        font-size: 1.5rem;
-    }
-    
-    .take {
-        padding: 1rem;
-    }
-    
-    .butt {
-        font-size: 12px;
-        padding: 0.5rem 1rem;
-        min-height: 2rem;
-    }
-    
-    #sim {
-        float: none;
-        display: block;
-        margin-top: 1rem;
-    }
-}
-
-/* Hide priority field if needed */
 .hide-priority #prDiv {
     display: none;
 }
 
-/* Loading states */
 .butt:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -379,19 +269,16 @@ tr:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Focus states for accessibility */
 .inpt:focus,
 .butt:focus {
     outline: 2px solid #00ffff;
     outline-offset: 2px;
 }
 
-/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
-/* Selection colors */
 ::selection {
     background: rgba(0, 255, 255, 0.3);
     color: white;
