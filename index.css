@@ -11,10 +11,10 @@ body {
     background-color: #1a1a1a;
 
     background-image: url('./bg\ image.jpeg');
-    background-size: cover;                 /* ✅ fills entire screen */
-    background-position: center center;     /* ✅ centers it */
-    background-repeat: no-repeat;           /* ✅ no tiling */
-    background-attachment: scroll;          /* ✅ allows responsive sizing */
+    background-size: cover;                
+    background-position: center center;  
+    background-repeat: no-repeat;        
+    background-attachment: scroll;        
 }
 
 
@@ -22,39 +22,10 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: auto;           /* 👈 allow height to grow */
+  height: auto;         
   min-height: 100vh;
 }
 
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('./bg\ image.jpeg');
-    background-size: 100% auto;  /* Slight zoom, avoids black bars */
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: -1;
-}
-
-
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-/* Header Section */
 .header-section {
     text-align: center;
     color: white;
@@ -64,22 +35,18 @@ body::before {
     margin-top: 2em;
 }
 
-.cpu-icon {
-    display: inline-flex;
+.cpu-icon{
+    display:flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 3.5em;
-    height: 3.5em;
-    background: linear-gradient(45deg, #00bcd4, #2196f3);
-    border-radius: 50%;
-    margin-bottom: 1em;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 0.5em 1.25em;
 }
 
-.cpu-icon svg {
-    color: white;
-    width: 2em;
-    height: 2em;
+.cpu-image {
+    width: 10%;
+    height: 10%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
 .main-title {
@@ -118,8 +85,20 @@ body::before {
     position: relative;
 }
 
-#signupp {
-    display: none;
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./bg\ image.jpeg');
+    background-size: 100% auto;  
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
 }
 
 .signup {
@@ -130,11 +109,6 @@ body::before {
     padding: 0;
 }
 
-.picture {
-    display: none;
-}
-
-/* Configuration Title */
 .signup::before {
     content: '⚙️ Configuration';
     display: block;
@@ -146,19 +120,6 @@ body::before {
     font-family: Arial, sans-serif;
 }
 
-/* Algorithm Selection Label */
-.signup form::before {
-    content: '⚡ Scheduling Algorithm';
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.875em;
-    font-weight: 500;
-    margin-bottom: 0.5em;
-    margin-top: 0;
-    font-family: Arial, sans-serif;
-}
-
-/* New label styles */
 .input-label {
     display: block;
     color: rgba(255, 255, 255, 0.9);
@@ -167,11 +128,6 @@ body::before {
     font-family: Arial, sans-serif;
     margin-top: 2em;
     margin-bottom: 0.5em;
-}
-
-/* Only the first label (Scheduling Algorithm) needs to be aligned from the top */
-.input-label:first-of-type {
-    margin-top: 0;
 }
 
 .inpt, .inpts {
@@ -190,25 +146,13 @@ body::before {
     box-sizing: border-box;
 }
 
-/* First select (Algorithm) */
-.inpts:first-of-type {
-    margin-top: 0;
-}
-
-/* Input Type field spacing */
 #inputs {
     position: relative;
-    margin-top: 0; /* now controlled by label margin */
+    margin-top: 0; 
 }
 
-/* REMOVE old ::before from #inputs */
-#inputs::before {
-    content: none;
-}
-
-/* Time Quanta styling */
 #timeQuanta {
-    margin-top: 0em; /* or more if needed */
+    margin-top: 0em; 
     position: relative;
 }
 
@@ -220,13 +164,6 @@ body::before {
     margin-top: 2em;
     margin-bottom: 0.5em;
     font-family: Arial, sans-serif;
-}
-
-
-
-/* REMOVE old ::before from #timeQuanta */
-#timeQuanta::before {
-    content: none;
 }
 
 .inpt:focus, .inpts:focus {
@@ -245,29 +182,8 @@ body::before {
     padding: 0.5em;
 }
 
-/* Show time quanta when Round Robin is selected */
-#timeQuanta[style*="display: block"] {
-    display: block !important;
-    animation: slideIn 0.3s ease-out;
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.2); /* same as normal */
-    box-shadow: none; /* remove glowing blue edge */
-}
-
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-0.5em);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .but {
-    margin-top: 2.5em; /* Increased spacing before button */
+    margin-top: 2.5em; 
     width: 100%;
     position: relative;
 }
@@ -301,46 +217,6 @@ body::before {
     transform: translateY(-0.125em) scale(1.05);
 }
 
-.butt:active {
-    background: linear-gradient(45deg, #0097a7, #1565c0);
-    box-shadow: rgba(0, 0, 0, 0.2) 0 0.125em 0.5em;
-    transform: translateY(0) scale(1);
-}
 
-.signin {
-    display: none;
-}
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(1em);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.header-section, .box {
-    animation: fadeIn 0.6s ease-out;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-    width: 0.5em;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 188, 212, 0.5);
-    border-radius: 0.25em;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 188, 212, 0.7);
-}
