@@ -4,6 +4,7 @@ const storeddData = localStorage.getItem("pInfo");
 prInfo = JSON.parse(storeddData);
 let inpt = prInfo.data;
 
+//Make a new Process array
 let size = prInfo.data.length;
 let process = [];
 for (let i = 0; i < size; i++) {
@@ -19,12 +20,14 @@ for (let i = 0; i < size; i++) {
   process.push(obj);
 }
 
+//Map the colors with the PID of process
 // uniqueColors = ["#FFB6C1", "#66CDAA", "#3CB371", "#FF7F50", "\t#DC143C", "#708090","#C71585","#4B0082","#008B8B","\t#BDB76B"];
 const mp = new Map();
 for (let i = 0; i < size; i++) {
   mp.set(inpt[i].pid, i);
 }
 
+//Sort the Process array based on AT
 for (let i = 0; i < size - 1; i++) {
   for (let j = 0; j < size - i - 1; j++) {
     if (process[j].at > process[j + 1].at) {
@@ -35,6 +38,7 @@ for (let i = 0; i < size - 1; i++) {
   }
 }
 
+//Filling Gantt Chart
 let gChart = [];
 let timer = 0;
 timer = timer + process[0].at;
@@ -61,9 +65,9 @@ for (let i = 0; i < size; i++) {
       start: process[i].ct,
       end: process[i + 1].at,
     };
-    let t = process[i + 1].at - sum;
-    timer = timer + t;
+    timer = process[i + 1].at;
   }
+
 
   const obj = {
     pid: process[i].pid,
@@ -79,6 +83,7 @@ for (let i = 0; i < size; i++) {
   if (obj2 != null) gChart.push(obj2);
 }
 
+//Create Entries in the Gantt Chart
 let tableBody3 = document.getElementById("tableBody3");
 var newRow = tableBody3.insertRow();
 let gSize = gChart.length;
@@ -99,6 +104,7 @@ let tatime = 0;
 let table = document.getElementById("myTable1");
 let table2 = document.getElementById("myTable2");
 
+//Handle Animation
 async function myAsyncFunction() {
   for (let i = 0; i < gSize; i++) {
     let id = gChart[i].pid;
@@ -174,6 +180,7 @@ async function myAsyncFunction() {
     c2.textContent = `${start}-${end}`;
   }
 
+  //Performance Metrics Calculations
   let avgWt = wait / size;
   let avgTat = tatime / size;
   await new Promise((resolve) => setTimeout(resolve, 100));
