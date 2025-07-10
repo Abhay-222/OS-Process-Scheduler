@@ -21,7 +21,7 @@ for (let i = 0; i < size; i++) {
   process.push(obj);
 }
 
-// uniqueColors = ["#FFB6C1", "#66CDAA", "#3CB371", "#FF7F50", "\t#DC143C", "#708090","#C71585","#4B0082","#008B8B","\t#BDB76B"];
+// uniqueColors = ["#FFB6C1", "#66CDAA", "#3CB371", "#FF7F50", "	#DC143C", "#708090","#C71585","#4B0082","#008B8B","	#BDB76B"];
 const mp = new Map();
 for (let i = 0; i < proInfo.length; i++) {
   mp.set(proInfo[i].pid, i);
@@ -40,12 +40,12 @@ for (let i = 0; i < size - 1; i++) {
 let programExecuted = 0;
 let timer = 0;
 const gChart = [];
-const timeQuantum = Number(proInfo[0].pr);
+const tQuanta = Number(proInfo[0].pr);
 const readyQueue = [];
 
 const checkForNewArrivals = () => {
   for (let i = 0; i < size; i++) {
-    if (process[i].at <= timer && !process[i].inQ && !process[i].isCompleted) {
+    if (!process[i].inQ && !process[i].isCt && process[i].at <= timer) {
       process[i].inQ = true;
       readyQueue.push({ indx: i, inTime: timer, pid: process[i].pidd });
     }
@@ -53,47 +53,45 @@ const checkForNewArrivals = () => {
 };
 
 const updateQueue = () => {
-  const current = readyQueue.shift();
-  const i = current.indx;
+  const { indx: i, inTime, pid } = readyQueue.shift();
+
+  const proc = process[i];
   const obj = {
-    pid: current.pid,
+    pid,
     start: timer,
     end: 0,
     rbt: 0,
-    bt: 0,
-    at: 0,
+    bt: proc.bt,
+    at: proc.at,
     ct: 0,
     tat: 0,
     wt: 0,
   };
 
-  if (process[i].rbt <= timeQuantum) {
-    timer += process[i].rbt;
-    process[i].rbt = 0;
-    process[i].ct = timer;
-    process[i].tat = process[i].ct - process[i].at;
-    process[i].wt = process[i].tat - process[i].bt;
-    process[i].isCompleted = true;
+  if (proc.rbt <= tQuanta) {
+    timer += proc.rbt;
+    proc.rbt = 0;
+    proc.ct = timer;
+    proc.tat = proc.ct - proc.at;
+    proc.wt = proc.tat - proc.bt;
+    proc.isCt = true;
     programExecuted++;
-    checkForNewArrivals();
 
     obj.end = timer;
-    obj.rbt = process[i].rbt;
-    obj.bt = process[i].bt;
-    obj.at = process[i].at;
-    obj.ct = process[i].ct;
-    obj.tat = process[i].tat;
-    obj.wt = process[i].wt;
+    obj.ct = proc.ct;
+    obj.tat = proc.tat;
+    obj.wt = proc.wt;
+
+    checkForNewArrivals();
   } else {
-    process[i].rbt -= timeQuantum;
-    timer += timeQuantum;
-    checkForNewArrivals();
-    readyQueue.push({ indx: i, inTime: timer, pid: process[i].pidd });
+    proc.rbt -= tQuanta;
+    timer += tQuanta;
 
     obj.end = timer;
-    obj.rbt = process[i].rbt;
-    obj.bt = process[i].bt;
-    obj.at = process[i].at;
+    obj.rbt = proc.rbt;
+
+    checkForNewArrivals();
+    readyQueue.push({ indx: i, inTime: timer, pid: proc.pidd });
   }
 
   gChart.push(obj);
@@ -101,12 +99,12 @@ const updateQueue = () => {
 
 const roundRobin = () => {
   for (let i = 0; i < size; i++) {
-    if (!process[i].inQ && !process[i].isCompleted) {
+    if (!process[i].inQ && !process[i].isCt) {
       timer = process[i].at;
 
       if (gChart.length === 0 && timer > 0) {
         gChart.push({ pid: "idle", start: 0, end: timer });
-      } else if (gChart[gChart.length - 1].end < timer) {
+      } else if (gChart.length !== 0 && gChart[gChart.length - 1].end < timer) {
         gChart.push({
           pid: "idle",
           start: gChart[gChart.length - 1].end,
@@ -114,18 +112,20 @@ const roundRobin = () => {
         });
       }
 
-      readyQueue.push({ indx: i, inTime: timer, pid: process[i].pidd });
       process[i].inQ = true;
+      readyQueue.push({ indx: i, inTime: timer, pid: process[i].pidd });
       break;
     }
   }
 
-  while (readyQueue.length !== 0) {
+  while (readyQueue.length > 0) {
     updateQueue();
   }
 };
 
-while (programExecuted !== size) roundRobin();
+while (programExecuted < size) {
+  roundRobin();
+}
 
 let tableBody3 = document.getElementById("tableBody3");
 var newRow = tableBody3.insertRow();
@@ -158,6 +158,7 @@ async function myAsyncFunction() {
     let tatTime = gChart[i].tat;
     let wtTime = gChart[i].wt;
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    
 
     if (id == "idle") {
       let table3 = document.getElementById("table3");
@@ -177,7 +178,7 @@ async function myAsyncFunction() {
       }
       pidCell.style.backgroundColor = "";
     }
-
+    
     let row = -1;
     for (let i = 0; i < size; i++) {
       if (id == table.rows[i + 1].cells[0].textContent) {
@@ -185,7 +186,7 @@ async function myAsyncFunction() {
         break;
       }
     }
-
+    
     let statusBar = document.getElementById(id);
     let wide = (((bt - rbt) / bt) * 100).toFixed(2);
 
